@@ -1,34 +1,47 @@
-import React from "react";
-import { Button, Box, TextField } from "@mui/material";
-
+import React from 'react';
+import { Button, Grid, TextField } from '@mui/material';
 
 //create comment component
-const CreateComment = ({ onSubmit }) => {
-    const [text, setText] = useState("");
+const CreateComment = ({ onCommentSubmit, commentText, setCommentText, userId, setUserId }) => {
+  const handleCommentSubmit = async () => {
+    if (!commentText.trim() || !userId.trim()) {
+      return; // Do not submit if comment text or user ID is empty
+    }
+    onCommentSubmit(); 
+  };
 
-
-const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit({ text });
-    setText("");
-};
-
-//this will likely have to be changed to be more in line with youtube's comment style
-return (
-    <Box component="form" onSubmit={handleSubmit} sx={{ mt:2 }}>
-        <TextField 
-            label="Comment"
-            multiline
-            fullWidth
-            value={text}
-            onChange={e => setText(e.target.value)}
+  return (
+    <Grid container spacing={2} alignItems="center">
+      <Grid item xs={9}>
+        <TextField
+          fullWidth
+          variant="outlined"
+          label="Add a comment"
+          value={commentText}
+          onChange={(e) => setCommentText(e.target.value)}
         />
-        <Button type="submit" variant="contained" color="primary" sx={{ mt:2 }}>
-            Add your comment...
+      </Grid>
+      <Grid item xs={2}>
+        <TextField
+          fullWidth
+          variant="outlined"
+          label="Your user ID"
+          value={userId}
+          onChange={(e) => setUserId(e.target.value)}
+        />
+      </Grid>
+      <Grid item xs={1}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleCommentSubmit}
+          disabled={!commentText.trim() || !userId.trim()}
+        >
+          Post
         </Button>
-    </Box>
-);
-
+      </Grid>
+    </Grid>
+  );
 };
 
 export default CreateComment;

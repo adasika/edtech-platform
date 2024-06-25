@@ -1,15 +1,15 @@
-import React from "react";
-import { Box } from "@mui/material";
+import React from 'react';
+import YouTube from 'react-youtube';
+import { getYouTubeVideoId } from '../../utils/utils';
+import { Paper } from '@mui/material';
 
-//component for the video box
-const VideoPlayer = ({ url }) => {
-    return (
-        <Box>
-            <video width="100%" controls>
-                <source src={url} type="video/mp4"/>
-            </video>
-        </Box>
-    );
+//Video Player for VideoDetail Page
+const VideoPlayer = ({ videoUrl }) => {
+  return (
+    <Paper elevation={3} style={{ padding: '20px', marginBottom: '20px' }}>
+      <YouTube videoId={getYouTubeVideoId(videoUrl)} opts={{ width: '100%', height: '400px' }} />
+    </Paper>
+  );
 };
 
 export default VideoPlayer;
