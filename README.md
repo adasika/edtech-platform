@@ -1,4 +1,4 @@
-Edtech-Platform by Archit Dasika
+**Edtech-Platform by Archit Dasika**
 
 How to Run this Locally
 
